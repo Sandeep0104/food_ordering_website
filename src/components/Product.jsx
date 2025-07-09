@@ -25,6 +25,7 @@ const Product = ({ product }) => {
         <img
           src={product.image}
           alt={product.title}
+          loading="lazy"
           className="object-cover h-full w-full rounded-md justify-between"
         />
       </div>

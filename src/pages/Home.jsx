@@ -5,7 +5,7 @@ import mainpic from "../assets/bg-food.png";
 import { products } from "../data";
 
 const Home = () => {
-  const featuredItems = products.slice(0, 3);
+  const featuredItems = products.slice(4, 7);
 
   return (
     <div className="bg-[#FAF3E0] py-10 lg:py-14">
@@ -34,6 +34,7 @@ const Home = () => {
             <img
               src={mainpic}
               alt="Delicious Food"
+              loading="lazy"
               className="w-[300px] sm:w-[360px] md:w-[400px] lg:w-[440px] rounded-full shadow-2xl object-cover border-4 border-white"
             />
           </div>
@@ -51,6 +52,7 @@ const Home = () => {
                 <img
                   src={item.image}
                   alt={item.name}
+                  loading="lazy"
                   className="rounded-full w-28 h-28 object-cover mx-auto mb-3"
                 />
                 <h3 className="text-center text-lg font-semibold text-gray-800">{item.name}</h3>
