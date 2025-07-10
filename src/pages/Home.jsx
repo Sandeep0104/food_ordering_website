@@ -1,7 +1,7 @@
 import React from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import mainpic from "../assets/bg-food.png";
+import mainpic from "../assets/manipic.jpeg";
 import { products } from "../data";
 
 const Home = () => {
