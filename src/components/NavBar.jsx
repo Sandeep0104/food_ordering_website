@@ -35,6 +35,10 @@ const Navbar = () => {
           <NavLink to="/contact" className={linkStyle}>
             Contact Us
           </NavLink>
+          <NavLink to="/about" className={linkStyle}>
+            About Us
+          </NavLink>
+
           <NavLink to="/cart" className={linkStyle}>
             <div className="relative">
               <FaShoppingCart className="text-2xl" />
@@ -68,6 +72,10 @@ const Navbar = () => {
           <NavLink to="/contact" onClick={() => setMobileMenuOpen(false)} className={linkStyle}>
             Contact Us
           </NavLink>
+          <NavLink to="/about" onClick={() => setMobileMenuOpen(false)} className={linkStyle}>
+            About Us
+          </NavLink>
+
           <NavLink to="/cart" onClick={() => setMobileMenuOpen(false)} className={linkStyle}>
             <div className="relative inline-block">
               <FaShoppingCart className="text-xl" />
