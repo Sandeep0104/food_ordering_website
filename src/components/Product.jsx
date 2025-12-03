@@ -1,5 +1,5 @@
 import { toast } from "react-hot-toast";
-import { add, remove } from "../redux/Slices/cartSlice";
+import { add, remove, decreaseQty } from "../redux/Slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Product = ({ product }) => {
@@ -12,11 +12,12 @@ const Product = ({ product }) => {
   };
 
   const removeFromCart = () => {
-    dispatch(remove(product.id));
-    toast.error("Item removed from cart");
+    dispatch(decreaseQty(product.id));
+    toast.error("Item quantity decreased");
   };
 
-  const isInCart = cart.some((p) => p.id === product.id);
+  const cartItem = cart.find((p) => p.id === product.id);
+  const qty = cartItem ? cartItem.qty : 0;
 
   return (
     <div className="flex flex-col items-center justify-between bg-[#fff7eb] rounded-2xl shadow-md p-4 hover:scale-105 transition-transform duration-300 ease-in-out">
@@ -45,13 +46,22 @@ const Product = ({ product }) => {
         <span className="text-[#4caf50] font-semibold text-base">
           ₹{product.price}
         </span>
-        {isInCart ? (
-          <button
-            onClick={removeFromCart}
-            className="bg-red-100 text-red-600 px-4 py-1 rounded-full text-sm hover:bg-red-200 transition"
-          >
-            Remove
-          </button>
+        {cartItem ? (
+          <div className="flex items-center gap-2">
+            <button
+              onClick={removeFromCart}
+              className="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm hover:bg-red-200 transition"
+            >
+              -
+            </button>
+            <span className="font-semibold text-gray-700">{qty}</span>
+            <button
+              onClick={addToCart}
+              className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm hover:bg-green-200 transition"
+            >
+              +
+            </button>
+          </div>
         ) : (
           <button
             onClick={addToCart}

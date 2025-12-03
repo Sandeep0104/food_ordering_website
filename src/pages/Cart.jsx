@@ -10,7 +10,7 @@ const Cart = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setAmount(cart.reduce((acc, curr) => acc + curr.price, 0));
+    setAmount(cart.reduce((acc, curr) => acc + curr.price * curr.qty, 0));
   }, [cart]);
 
   const handleCheckout = () => {
