@@ -1,4 +1,4 @@
-const app = require("../server/index.cjs");
+const app = require("../backend/index.cjs");
 
 module.exports = (req, res) => {
     // Vercel serverless function entry
