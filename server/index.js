@@ -16,7 +16,8 @@ app.use(cors({
 }));
 
 // Connect DB
-connectDB();
+// Connect DB lazily in routes that need it
+// connectDB();
 
 // Routes
 app.use("/api/orders", orderRoutes);

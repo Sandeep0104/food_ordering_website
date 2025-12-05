@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Stripe = require("stripe");
+const connectDB = require("../config/db");
 
 require("dotenv").config();
 
@@ -8,6 +9,8 @@ require("dotenv").config();
 
 router.post("/create-payment-intent", async (req, res) => {
     try {
+        await connectDB();
+
         if (!process.env.STRIPE_SECRET_KEY) {
             console.error("STRIPE_SECRET_KEY is missing!");
             return res.status(500).json({ error: "Stripe key is missing in server environment" });
