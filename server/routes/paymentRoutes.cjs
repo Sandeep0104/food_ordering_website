@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Stripe = require("stripe");
-const connectDB = require("../config/db");
+const connectDB = require("../config/db.cjs");
 
 require("dotenv").config();
 

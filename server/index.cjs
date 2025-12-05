@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const connectDB = require("./config/db");
-const orderRoutes = require("./routes/orderRoutes");
+const connectDB = require("./config/db.cjs");
+const orderRoutes = require("./routes/orderRoutes.cjs");
 
 require("dotenv").config();
 
@@ -21,7 +21,7 @@ app.use(cors({
 
 // Routes
 app.use("/api/orders", orderRoutes);
-app.use("/api/payment", require("./routes/paymentRoutes"));
+app.use("/api/payment", require("./routes/paymentRoutes.cjs"));
 
 app.get("/", (req, res) => {
     res.send("API is running...");

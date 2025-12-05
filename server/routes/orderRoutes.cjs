@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Order = require("../models/Order");
-const connectDB = require("../config/db");
+const Order = require("../models/Order.cjs");
+const connectDB = require("../config/db.cjs");
 
 // Create a new Order
 router.post("/", async (req, res) => {
