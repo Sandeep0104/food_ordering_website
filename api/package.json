@@ -2,6 +2,7 @@
     "name": "api",
     "version": "1.0.0",
     "description": "Vercel serverless API functions",
-    "main": "index.cjs",
-    "type": "commonjs"
+    "dependencies": {
+        "stripe": "^20.0.0"
+    }
 }
