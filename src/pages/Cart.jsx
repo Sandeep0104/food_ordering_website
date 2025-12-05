@@ -12,6 +12,8 @@ import CheckoutForm from "../components/CheckoutForm";
 // Make sure to replace with your public key
 const stripePromise = loadStripe("pk_test_51RmyuyRXzoqjQQKKWnzbFM1eBnjUbdS7mw6hJPbdldtvUYApKeECvDw6VCzIyNt4NrDDJKXVj7KY74IQfmMGAbEp00Z5khylCW");
 
+const API_URL = import.meta.env.VITE_API_URL || "";
+
 const Cart = () => {
   const { cart } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -29,7 +31,7 @@ const Cart = () => {
 
     try {
       console.log("Initiating payment...");
-      const res = await fetch("/api/payment/create-payment-intent", {
+      const res = await fetch(`${API_URL}/api/payment/create-payment-intent`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: Math.round(amount * 100) }), // Amount in cents/paise
@@ -69,15 +71,15 @@ const Cart = () => {
       const orderData = {
         items: cart.map(item => ({
           id: item.id,
-          name: item.title, // Corrected from item.name
+          name: item.title,
           price: item.price,
           qty: item.qty,
-          img: item.image // Corrected from item.img
+          img: item.image
         })),
         amount: amount,
       };
 
-      const res = await fetch("/api/orders", {
+      const res = await fetch(`${API_URL}/api/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
