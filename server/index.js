@@ -26,6 +26,17 @@ app.get("/", (req, res) => {
     res.send("API is running...");
 });
 
+// Health Check that bypasses DB/Helpers
+app.get("/api/health", (req, res) => {
+    res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+    console.error("Global Error:", err);
+    res.status(500).json({ error: "Internal Server Error", details: err.message });
+});
+
 const PORT = process.env.PORT || 5000;
 
 if (require.main === module) {
