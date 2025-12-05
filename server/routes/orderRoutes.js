@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const Order = require("../models/Order");
+const connectDB = require("../config/db");
 
 // Create a new Order
 router.post("/", async (req, res) => {
     try {
+        await connectDB();
         const { items, amount } = req.body;
 
         const newOrder = new Order({
@@ -22,6 +24,7 @@ router.post("/", async (req, res) => {
 // Get all Orders
 router.get("/", async (req, res) => {
     try {
+        await connectDB();
         const orders = await Order.find().sort({ createdAt: -1 });
         res.status(200).json({ success: true, orders });
     } catch (error) {

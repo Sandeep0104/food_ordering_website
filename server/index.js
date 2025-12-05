@@ -41,6 +41,8 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 
 if (require.main === module) {
+    // Eager connect for local development
+    connectDB();
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
     });
