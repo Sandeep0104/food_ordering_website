@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "Vercel serverless API functions",
     "dependencies": {
-        "stripe": "^20.0.0"
+        "stripe": "^20.0.0",
+        "mongoose": "^8.20.2"
     }
 }
