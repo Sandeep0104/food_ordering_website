@@ -29,7 +29,14 @@ app.get("/", (req, res) => {
 
 // Health Check that bypasses DB/Helpers
 app.get("/api/health", (req, res) => {
-    res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+    console.log("Health check triggered");
+    res.status(200).json({
+        status: "ok", timestamp: new Date().toISOString(), env: {
+            stripeKey: !!process.env.STRIPE_SECRET_KEY,
+            mongoUri: !!process.env.MONGO_URI,
+            nodeMain: require.main === module
+        }
+    });
 });
 
 // Global Error Handler

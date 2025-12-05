@@ -10,7 +10,7 @@ import CartItem from "../components/CartItem";
 import CheckoutForm from "../components/CheckoutForm";
 
 // Make sure to replace with your public key
-const stripePromise = loadStripe("pk_test_51RmyuyRXzoqjQQKKWnzbFM1eBnjUbdS7mw6hJPbdldtvUYApKeECvDw6VCzIyNt4NrDDJKXVj7KY74IQfmMGAbEp00Z5khylCW");
+const stripePromise = loadStripe("pk_test_51Sb6PoRzUpTgL8IJ5VYJRT3PLM2d1Z0CgLjSADQoYFTR4WiVOnD5gfCWICFC4ZvqTPHrje2EVa15lB2e5igjI5gB00JnEUJeyu");
 
 const API_URL = import.meta.env.VITE_API_URL || "";
 
