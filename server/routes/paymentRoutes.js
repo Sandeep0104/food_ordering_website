@@ -4,11 +4,18 @@ const Stripe = require("stripe");
 
 require("dotenv").config();
 
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+// stripe init moved to handler
 
 router.post("/create-payment-intent", async (req, res) => {
     try {
+        if (!process.env.STRIPE_SECRET_KEY) {
+            console.error("STRIPE_SECRET_KEY is missing!");
+            return res.status(500).json({ error: "Stripe key is missing in server environment" });
+        }
+
+        const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
         const { amount } = req.body;
+        console.log("Creating payment intent for amount:", amount);
 
         // Create a PaymentIntent with the order amount and currency
         const paymentIntent = await stripe.paymentIntents.create({
@@ -23,6 +30,7 @@ router.post("/create-payment-intent", async (req, res) => {
             clientSecret: paymentIntent.client_secret,
         });
     } catch (error) {
+        console.error("Stripe Error:", error);
         res.status(500).json({ error: error.message });
     }
 });
