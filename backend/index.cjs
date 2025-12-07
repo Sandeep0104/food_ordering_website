@@ -22,6 +22,7 @@ app.use(cors({
 // Routes
 app.use("/api/orders", orderRoutes);
 app.use("/api/payment", require("./routes/paymentRoutes.cjs"));
+app.use("/api/contact", require("./routes/contactRoutes.cjs"));
 
 app.get("/", (req, res) => {
     res.send("API is running...");

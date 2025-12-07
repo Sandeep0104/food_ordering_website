@@ -5,27 +5,48 @@ import { useNavigate } from "react-router-dom";
 const Contact = () => {
   const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const sendMessage = (e) => {
+  const sendMessage = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    toast.success("Message Sent Successfully");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
 
-    setName("");
-    setEmail("");
-    setMessage("");
+      const data = await response.json();
 
-    setIsSubmitted(true);
+      if (data.success) {
+        toast.success("Message Sent Successfully");
+        setName("");
+        setEmail("");
+        setMessage("");
+        setIsSubmitted(true);
+      } else {
+        toast.error(data.message || "Failed to send message");
+      }
+    } catch (error) {
+      console.error("Contact form error:", error);
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-[#FFF7ED] flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-2xl bg-white rounded-xl border border-orange-200 shadow-lg p-8">
-        
+
         {/* Header */}
         <div className="text-center mb-8">
           <h2 className="text-4xl font-bold text-[#E76F51] mb-2">Contact Us</h2>
@@ -73,9 +94,10 @@ const Contact = () => {
           <div className="text-center">
             <button
               type="submit"
-              className="bg-[#E76F51] hover:bg-[#D65A3A] text-white font-semibold px-6 py-2 rounded-md"
+              disabled={isLoading}
+              className="bg-[#E76F51] hover:bg-[#D65A3A] text-white font-semibold px-6 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Send Message
+              {isLoading ? "Sending..." : "Send Message"}
             </button>
           </div>
         </form>
@@ -84,7 +106,7 @@ const Contact = () => {
         {isSubmitted && (
           <div className="text-center mt-6">
             <p className="text-[#2A9D8F] font-medium mb-2">
-               Thank you! We’ll get back to you soon.
+              Thank you! We’ll get back to you soon.
             </p>
             <button
               onClick={() => navigate("/")}
